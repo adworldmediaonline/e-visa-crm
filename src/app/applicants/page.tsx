@@ -16,7 +16,6 @@ export default async function TaskPage() {
   const { data }: { data: Applicants[] } = await fetchData(
     apiEndpoints.FIRST_STEP_VISA_REQUEST_FORM
   );
-  console.log('data', data);
 
   return (
     <>

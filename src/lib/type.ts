@@ -23,6 +23,7 @@ export type Applicants = {
   paymentStatus: 'pending' | 'success' | 'failed';
   termsAndConditions: boolean;
   termsAndConditionsContent?: string;
+  createdAt: string;
 };
 
 export type Step2Form = {
@@ -622,8 +623,8 @@ export interface BusinessGroup {
   createdAt: string;
   updatedAt: string;
   __v: number;
-};
-// business third party 
+}
+// business third party
 export type ThirdPartyBusinessMember = {
   _id: string;
   formId: string;
@@ -697,5 +698,4 @@ export interface ThirdPartyBusiness {
   createdAt: string;
   updatedAt: string;
   __v: number;
-};
-
+}

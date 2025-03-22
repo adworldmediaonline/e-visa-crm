@@ -45,6 +45,28 @@ export const columns: ColumnDef<Applicants>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: 'createdAt',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created At" />
+    ),
+    cell: ({ row }) => {
+      const timestamp = row.getValue('createdAt');
+      if (!timestamp) return <div className="w-[120px]">-</div>;
+
+      // Format the date
+      const date = new Date(timestamp as string);
+      const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+
+      return <div className="w-[120px]">{formattedDate}</div>;
+    },
+    enableSorting: true,
+    enableHiding: false,
+  },
+  {
     accessorKey: 'applicationType',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Type" />
