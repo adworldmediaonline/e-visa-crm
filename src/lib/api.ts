@@ -1,5 +1,5 @@
-// export const baseUrl = 'https://visa-backend-v2.vercel.app';
-export const baseUrl = 'http://localhost:8090';
+export const baseUrl = 'https://visa-backend-v2.vercel.app';
+// export const baseUrl = 'http://localhost:8090';
 
 export const apiEndpoints = {
   FIRST_STEP_VISA_REQUEST_FORM: '/visa/viewVisaRequestForm',
