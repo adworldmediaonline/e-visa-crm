@@ -25,6 +25,7 @@ const badgeVariants = cva(
           'border-transparent bg-[#FFA500] text-slate-50 hover:bg-[#FFA500]/80',
         pending:
           'border-transparent bg-[#FFFF00] text-slate-50 hover:bg-[#FFFF00]/80',
+        paid: 'border-transparent bg-[#38A169] text-slate-50 hover:bg-[#38A169]/80',
         underProcess:
           'border-transparent bg-[#90EE90] text-slate-50 hover:bg-[#90EE90]/80',
         verify:

@@ -130,23 +130,52 @@ export const columns: ColumnDef<Applicants>[] = [
   //   },
   // },
   {
-    accessorKey: 'paymentStatus',
+    accessorKey: 'paid',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Payment Status" />
     ),
     cell: ({ row }) => {
+      const isPaid = row.getValue('paid');
+
+      return (
+        <div className="flex w-[100px] items-center">
+          {isPaid === true ? (
+            <Badge
+              variant="paid"
+              className="capitalize cursor-pointer"
+              title="Payment Confirmed"
+            >
+              paid
+            </Badge>
+          ) : (
+            <Badge
+              variant="pendingPayment"
+              className="capitalize cursor-pointer"
+              title="Payment not completed"
+            >
+              not paid
+            </Badge>
+          )}
+        </div>
+      );
+    },
+    enableSorting: true,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'visaStatus',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Visa Status" />
+    ),
+    cell: ({ row }) => {
       const status = statuses.find(
-        status => status.value === row.getValue('paymentStatus')
+        status => status.value === row.getValue('visaStatus')
       );
 
       if (!status) {
         return null;
       }
-      // const statusVariant = status?.label?.toLowerCase()
-      //   ? status?.label?.toLowerCase()
-      //   : 'default';
-      {
-      }
+
       return (
         <div className="flex w-[100px] items-center">
           {status.value === 'incomplete' && (
@@ -172,6 +201,15 @@ export const columns: ColumnDef<Applicants>[] = [
               variant="pending"
               className="capitalize cursor-pointer"
               title="Payment Completed"
+            >
+              {status.value}
+            </Badge>
+          )}
+          {status.value === 'paid' && (
+            <Badge
+              variant="paid"
+              className="capitalize cursor-pointer"
+              title="Payment Confirmed"
             >
               {status.value}
             </Badge>
