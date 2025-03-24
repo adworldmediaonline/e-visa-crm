@@ -40,7 +40,9 @@ export const columns: ColumnDef<Applicants>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="UserID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue('_id')}</div>,
+    cell: ({ row }) => (
+      <div className="max-w-[120px] truncate">{row.getValue('_id')}</div>
+    ),
     enableSorting: false,
     enableHiding: false,
   },
@@ -51,9 +53,8 @@ export const columns: ColumnDef<Applicants>[] = [
     ),
     cell: ({ row }) => {
       const timestamp = row.getValue('createdAt');
-      if (!timestamp) return <div className="w-[120px]">-</div>;
+      if (!timestamp) return <div className="max-w-[120px] truncate">-</div>;
 
-      // Format the date
       const date = new Date(timestamp as string);
       const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -61,7 +62,7 @@ export const columns: ColumnDef<Applicants>[] = [
         day: 'numeric',
       });
 
-      return <div className="w-[120px]">{formattedDate}</div>;
+      return <div className="max-w-[120px] truncate">{formattedDate}</div>;
     },
     enableSorting: true,
     enableHiding: false,
@@ -72,7 +73,9 @@ export const columns: ColumnDef<Applicants>[] = [
       <DataTableColumnHeader column={column} title="Type" />
     ),
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('applicationType')}</div>
+      <div className="max-w-[100px] truncate">
+        {row.getValue('applicationType')}
+      </div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -83,7 +86,7 @@ export const columns: ColumnDef<Applicants>[] = [
       <DataTableColumnHeader column={column} title="Email" />
     ),
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('emailId')}</div>
+      <div className="max-w-[200px] truncate">{row.getValue('emailId')}</div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -94,7 +97,7 @@ export const columns: ColumnDef<Applicants>[] = [
       <DataTableColumnHeader column={column} title="Contact" />
     ),
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('contactNo')}</div>
+      <div className="max-w-[120px] truncate">{row.getValue('contactNo')}</div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -105,7 +108,9 @@ export const columns: ColumnDef<Applicants>[] = [
       <DataTableColumnHeader column={column} title="Passport Type" />
     ),
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('passportType')}</div>
+      <div className="max-w-[120px] truncate">
+        {row.getValue('passportType')}
+      </div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -142,7 +147,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {isPaid === true ? (
             <Badge
               variant="paid"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Payment Confirmed"
             >
               paid
@@ -150,7 +155,7 @@ export const columns: ColumnDef<Applicants>[] = [
           ) : (
             <Badge
               variant="pendingPayment"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Payment not completed"
             >
               not paid
@@ -177,11 +182,11 @@ export const columns: ColumnDef<Applicants>[] = [
       }
 
       return (
-        <div className="flex w-[100px] items-center">
+        <div className="flex w-[120px] items-center gap-2">
           {status.value === 'incomplete' && (
             <Badge
               variant="incomplete"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="form not completed"
             >
               {status.value}
@@ -190,7 +195,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'pendingPayment' && (
             <Badge
               variant="pendingPayment"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Payment not completed"
             >
               {status.value}
@@ -199,7 +204,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'pending' && (
             <Badge
               variant="pending"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Payment Completed"
             >
               {status.value}
@@ -208,7 +213,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'paid' && (
             <Badge
               variant="paid"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Payment Confirmed"
             >
               {status.value}
@@ -217,7 +222,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'visaSent' && (
             <Badge
               variant="visaSent"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Visa Sent Successfully"
             >
               {status.value}
@@ -226,7 +231,7 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'underProcess' && (
             <Badge
               variant="underProcess"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Visa is under process"
             >
               {status.value}
@@ -235,13 +240,12 @@ export const columns: ColumnDef<Applicants>[] = [
           {status.value === 'verify' && (
             <Badge
               variant="verify"
-              className="capitalize cursor-pointer"
+              className="capitalize cursor-pointer truncate"
               title="Visa is verify"
             >
               {status.value}
             </Badge>
           )}
-
           <DataTableRowActions row={row} href="/applicants" eyeOpen={false} />
         </div>
       );
@@ -253,7 +257,7 @@ export const columns: ColumnDef<Applicants>[] = [
   {
     accessorKey: 'lastExitStepUrl',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="lastExitStepUrl" />
+      <DataTableColumnHeader column={column} title="Last Exit Step" />
     ),
     cell: ({ row }) => {
       const lastExitStepUrl = lastExitStepUrls.find(
@@ -266,11 +270,11 @@ export const columns: ColumnDef<Applicants>[] = [
       }
 
       return (
-        <div className="flex items-center">
+        <div className="flex items-center max-w-[150px] truncate">
           {lastExitStepUrl.icon && (
-            <lastExitStepUrl.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+            <lastExitStepUrl.icon className="mr-2 h-4 w-4 text-muted-foreground flex-shrink-0" />
           )}
-          <span>{lastExitStepUrl.label}</span>
+          <span className="truncate">{lastExitStepUrl.label}</span>
         </div>
       );
     },
@@ -281,7 +285,9 @@ export const columns: ColumnDef<Applicants>[] = [
   {
     id: 'actions',
     cell: ({ row }) => (
-      <DataTableRowActions row={row} href="/applicants" eyeOpen={true} />
+      <div className="flex justify-end">
+        <DataTableRowActions row={row} href="/applicants" eyeOpen={true} />
+      </div>
     ),
   },
 ];

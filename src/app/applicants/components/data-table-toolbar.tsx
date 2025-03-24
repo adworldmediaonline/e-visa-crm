@@ -20,15 +20,15 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:space-x-2">
         <Input
           placeholder="Filter applicants by User Id..."
           value={(table.getColumn('_id')?.getFilterValue() as string) ?? ''}
           onChange={event =>
             table.getColumn('_id')?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-8 w-full sm:w-[250px]"
         />
         {table.getColumn('paymentStatus') && (
           <DataTableFacetedFilter
@@ -41,7 +41,7 @@ export function DataTableToolbar<TData>({
         {table.getColumn('lastExitStepUrl') && (
           <DataTableFacetedFilter
             column={table.getColumn('lastExitStepUrl')}
-            title="lastExitStepUrl"
+            title="Last Exit Step"
             options={lastExitStepUrls}
           />
         )}
